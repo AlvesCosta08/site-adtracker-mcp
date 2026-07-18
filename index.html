@@ -21,7 +21,7 @@
     <style>
         :root {
             --primary: #4A90E2; --secondary: #50E3C2; --dark: #0F172A; --gray: #64748B;
-            --white: #FFFFFF; --red: #EF4444; --green: #10B981;
+            --white: #FFFFFF; --red: #EF4444; --green: #10B981; --whatsapp: #25D366;
             --gradient: linear-gradient(135deg, #4A90E2 0%, #50E3C2 100%);
             --gradient-dark: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
             --shadow: 0 10px 40px rgba(0,0,0,0.1); --shadow-lg: 0 20px 60px rgba(0,0,0,0.15); --radius: 16px;
@@ -171,8 +171,62 @@
         .footer-links a:hover { color: var(--secondary); }
         .footer-links .separator { color: rgba(255,255,255,0.2); }
 
+        /* ============================================ */
+        /* BOTÃO FLUTUANTE WHATSAPP */
+        /* ============================================ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            animation: floatWpp 3s ease-in-out infinite;
+        }
+        .whatsapp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--whatsapp);
+            color: white;
+            border-radius: 50%;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+        .whatsapp-float a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-float a:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        @keyframes floatWpp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         @media (max-width: 1024px) { .hero .container { grid-template-columns: 1fr; text-align: center; } .hero h1 { font-size: 40px; } .hero p { margin-left: auto; margin-right: auto; } .hero-stats { justify-content: center; } .hero-buttons { justify-content: center; } .section-title { font-size: 32px; } }
-        @media (max-width: 768px) { .nav-links { display: none; } .mobile-toggle { display: block; } .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,23,42,0.98); backdrop-filter: blur(20px); padding: 24px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.1); } .hero h1 { font-size: 32px; } .hero-stats { flex-direction: column; gap: 16px; align-items: center; } .section { padding: 60px 0; } .section-title { font-size: 28px; } .table-wrapper { overflow-x: auto; } .table-wrapper table { min-width: 600px; } .comparison-wrapper { overflow-x: auto; } .comparison-wrapper table { min-width: 500px; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .mobile-toggle { display: block; } .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,23,42,0.98); backdrop-filter: blur(20px); padding: 24px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.1); } .hero h1 { font-size: 32px; } .hero-stats { flex-direction: column; gap: 16px; align-items: center; } .section { padding: 60px 0; } .section-title { font-size: 28px; } .table-wrapper { overflow-x: auto; } .table-wrapper table { min-width: 600px; } .comparison-wrapper { overflow-x: auto; } .comparison-wrapper table { min-width: 500px; } .whatsapp-float { bottom: 20px; right: 20px; } .whatsapp-float a { width: 55px; height: 55px; font-size: 26px; } }
     </style>
 </head>
 <body>
@@ -390,6 +444,16 @@
             <p>© 2026 <strong>AdTracker MCP</strong>. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <!-- ============================================ -->
+    <!-- BOTÃO FLUTUANTE WHATSAPP -->
+    <!-- ============================================ -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/55SEUNUMERO" target="_blank" title="Fale conosco pelo WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="whatsapp-tooltip">Fale conosco!</span>
+        </a>
+    </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
