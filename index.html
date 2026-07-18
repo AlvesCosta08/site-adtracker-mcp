@@ -15,147 +15,57 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #4A90E2;
-            --secondary: #50E3C2;
-            --dark: #0F172A;
-            --gray: #64748B;
-            --white: #FFFFFF;
-            --red: #EF4444;
-            --green: #10B981;
+            --primary: #4A90E2; --secondary: #50E3C2; --dark: #0F172A; --gray: #64748B;
+            --white: #FFFFFF; --red: #EF4444; --green: #10B981;
             --gradient: linear-gradient(135deg, #4A90E2 0%, #50E3C2 100%);
             --gradient-dark: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-            --shadow: 0 10px 40px rgba(0,0,0,0.1);
-            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
-            --radius: 16px;
+            --shadow: 0 10px 40px rgba(0,0,0,0.1); --shadow-lg: 0 20px 60px rgba(0,0,0,0.15); --radius: 16px;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #1E293B;
-            overflow-x: hidden;
-            background: var(--white);
-        }
-
+        body { font-family: 'Inter', sans-serif; color: #1E293B; overflow-x: hidden; background: var(--white); }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-        .preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--dark); display: flex; align-items: center; justify-content: center;
-            z-index: 9999; transition: opacity 0.5s, visibility 0.5s;
-        }
+        .preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s, visibility 0.5s; }
         .preloader.hidden { opacity: 0; visibility: hidden; }
-        .preloader-spinner {
-            width: 50px; height: 50px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: var(--secondary); border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+        .preloader-spinner { width: 50px; height: 50px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--secondary); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .navbar {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 20px 0; transition: all 0.3s ease;
-        }
-        .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
-            padding: 12px 0; box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-        }
+        .navbar { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 20px 0; transition: all 0.3s ease; }
+        .navbar.scrolled { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); padding: 12px 0; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
         .navbar .container { display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .nav-logo {
-            width: 42px; height: 42px; background: var(--gradient); border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 18px; color: white;
-        }
-        .nav-name { font-size: 20px; font-weight: 700; color: white; }
-        .nav-name span { color: var(--secondary); }
+        .nav-logo { width: 42px; height: 42px; background: var(--gradient); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; color: white; }
+        .nav-name { font-size: 20px; font-weight: 700; color: white; } .nav-name span { color: var(--secondary); }
         .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
-        .nav-links a {
-            color: rgba(255,255,255,0.85); text-decoration: none;
-            font-weight: 500; font-size: 14px; transition: color 0.3s; position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-            background: var(--secondary); transition: width 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a:hover { color: var(--secondary); }
-        .btn-nav {
-            background: var(--gradient) !important; color: white !important;
-            padding: 12px 28px !important; border-radius: 50px !important;
-            font-weight: 600 !important; transition: all 0.3s !important;
-        }
+        .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-weight: 500; font-size: 14px; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--secondary); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; } .nav-links a:hover { color: var(--secondary); }
+        .btn-nav { background: var(--gradient) !important; color: white !important; padding: 12px 28px !important; border-radius: 50px !important; font-weight: 600 !important; transition: all 0.3s !important; }
         .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4); }
         .btn-nav::after { display: none !important; }
         .mobile-toggle { display: none; background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
 
-        .hero {
-            min-height: 100vh; display: flex; align-items: center;
-            background: var(--gradient-dark); position: relative; overflow: hidden;
-            padding: 120px 0 80px;
-        }
-        .hero::before {
-            content: ''; position: absolute; top: -30%; right: -15%;
-            width: 700px; height: 700px;
-            background: radial-gradient(circle, rgba(74, 144, 226, 0.2) 0%, transparent 70%);
-            border-radius: 50%; animation: float 8s ease-in-out infinite;
-        }
-        .hero::after {
-            content: ''; position: absolute; bottom: -20%; left: -10%;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(80, 227, 194, 0.15) 0%, transparent 70%);
-            border-radius: 50%; animation: float 6s ease-in-out infinite reverse;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-30px) scale(1.05); }
-        }
-        .hero .container {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-            align-items: center; position: relative; z-index: 1;
-        }
-        .hero-tag {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(80, 227, 194, 0.15); color: var(--secondary);
-            padding: 10px 20px; border-radius: 50px; font-size: 13px;
-            font-weight: 600; margin-bottom: 24px;
-        }
-        .hero-tag .dot {
-            width: 8px; height: 8px; background: var(--secondary);
-            border-radius: 50%; animation: pulse 2s infinite;
-        }
+        .hero { min-height: 100vh; display: flex; align-items: center; background: var(--gradient-dark); position: relative; overflow: hidden; padding: 120px 0 80px; }
+        .hero::before { content: ''; position: absolute; top: -30%; right: -15%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(74, 144, 226, 0.2) 0%, transparent 70%); border-radius: 50%; animation: float 8s ease-in-out infinite; }
+        .hero::after { content: ''; position: absolute; bottom: -20%; left: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(80, 227, 194, 0.15) 0%, transparent 70%); border-radius: 50%; animation: float 6s ease-in-out infinite reverse; }
+        @keyframes float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
+        .hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+        .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(80, 227, 194, 0.15); color: var(--secondary); padding: 10px 20px; border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 24px; }
+        .hero-tag .dot { width: 8px; height: 8px; background: var(--secondary); border-radius: 50%; animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        .hero h1 {
-            font-size: 56px; font-weight: 900; color: white;
-            line-height: 1.15; margin-bottom: 20px;
-        }
-        .hero h1 span {
-            background: var(--gradient); -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .hero p {
-            font-size: 18px; color: rgba(255,255,255,0.7);
-            line-height: 1.7; margin-bottom: 32px; max-width: 520px;
-        }
+        .hero h1 { font-size: 56px; font-weight: 900; color: white; line-height: 1.15; margin-bottom: 20px; }
+        .hero h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 18px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 32px; max-width: 520px; }
         .hero-stats { display: flex; gap: 40px; margin-bottom: 32px; }
-        .hero-stat h3 { font-size: 32px; font-weight: 800; color: white; }
-        .hero-stat h3 span { color: var(--secondary); }
+        .hero-stat h3 { font-size: 32px; font-weight: 800; color: white; } .hero-stat h3 span { color: var(--secondary); }
         .hero-stat p { font-size: 13px; color: rgba(255,255,255,0.6); margin: 0; }
         .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-        .btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 16px 32px; border-radius: 50px; font-weight: 700;
-            font-size: 15px; text-decoration: none; transition: all 0.3s ease;
-            cursor: pointer; border: none;
-        }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; border-radius: 50px; font-weight: 700; font-size: 15px; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
         .btn-primary { background: var(--gradient); color: white; box-shadow: 0 8px 30px rgba(74, 144, 226, 0.3); }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(74, 144, 226, 0.5); }
         .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3); }
@@ -166,55 +76,29 @@
         .section-dark { background: var(--dark); color: white; }
         .section-gray { background: #F8FAFC; }
         .section-header { text-align: center; margin-bottom: 64px; }
-        .section-label {
-            display: inline-block; background: rgba(74, 144, 226, 0.1);
-            color: var(--primary); padding: 8px 20px; border-radius: 50px;
-            font-size: 13px; font-weight: 600; margin-bottom: 16px;
-            letter-spacing: 1px; text-transform: uppercase;
-        }
+        .section-label { display: inline-block; background: rgba(74, 144, 226, 0.1); color: var(--primary); padding: 8px 20px; border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 16px; letter-spacing: 1px; text-transform: uppercase; }
         .section-title { font-size: 42px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
         .section-dark .section-title { color: white; }
-        .section-subtitle {
-            font-size: 17px; color: var(--gray); max-width: 600px;
-            margin: 0 auto; line-height: 1.6;
-        }
+        .section-subtitle { font-size: 17px; color: var(--gray); max-width: 600px; margin: 0 auto; line-height: 1.6; }
         .section-dark .section-subtitle { color: rgba(255,255,255,0.6); }
 
         .problems-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
-        .problem-card {
-            background: white; border-radius: var(--radius); padding: 32px;
-            box-shadow: var(--shadow); border-left: 4px solid var(--red);
-            transition: all 0.3s ease;
-        }
+        .problem-card { background: white; border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); border-left: 4px solid var(--red); transition: all 0.3s ease; }
         .problem-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
         .problem-icon { font-size: 36px; margin-bottom: 16px; }
         .problem-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
         .problem-card p { color: var(--gray); font-size: 14px; line-height: 1.6; }
 
-        .platforms-row {
-            display: flex; justify-content: center; align-items: center;
-            gap: 20px; flex-wrap: wrap; margin-bottom: 40px;
-        }
-        .platform-item {
-            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius); padding: 20px 24px;
-            text-align: center; min-width: 140px; transition: all 0.3s;
-        }
+        .platforms-row { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
+        .platform-item { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 20px 24px; text-align: center; min-width: 140px; transition: all 0.3s; }
         .platform-item:hover { background: rgba(255,255,255,0.12); transform: translateY(-5px); }
         .platform-item i { font-size: 32px; margin-bottom: 8px; display: block; }
-        .platform-item.google i { color: #4285F4; }
-        .platform-item.meta i { color: #1877F2; }
-        .platform-item.tiktok i { color: #fff; }
-        .platform-item.linkedin i { color: #0A66C2; }
+        .platform-item.google i { color: #4285F4; } .platform-item.meta i { color: #1877F2; }
+        .platform-item.tiktok i { color: #fff; } .platform-item.linkedin i { color: #0A66C2; }
         .platform-item span { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8); }
         .arrow-icon { font-size: 28px; color: var(--secondary); animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(10px); } }
-        .result-box {
-            background: var(--gradient); border-radius: var(--radius);
-            padding: 24px 40px; text-align: center; color: white;
-            font-weight: 700; font-size: 18px;
-            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.3);
-        }
+        .result-box { background: var(--gradient); border-radius: var(--radius); padding: 24px 40px; text-align: center; color: white; font-weight: 700; font-size: 18px; box-shadow: 0 15px 40px rgba(74, 144, 226, 0.3); }
 
         .table-wrapper { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); }
         .table-wrapper table { width: 100%; border-collapse: collapse; }
@@ -226,27 +110,25 @@
         .table-wrapper .metric-name { font-weight: 600; }
         .table-wrapper .total-col { font-weight: 700; color: var(--primary); background: rgba(74,144,226,0.03); }
         .badge-roas { background: #ECFDF5; color: #10B981; padding: 5px 12px; border-radius: 50px; font-weight: 700; font-size: 12px; }
-        .insight-box {
-            background: #ECFDF5; border: 1px solid #A7F3D0; padding: 20px 24px;
-            border-radius: 12px; margin-top: 20px; display: flex; align-items: flex-start; gap: 12px;
-        }
+        .insight-box { background: #ECFDF5; border: 1px solid #A7F3D0; padding: 20px 24px; border-radius: 12px; margin-top: 20px; display: flex; align-items: flex-start; gap: 12px; }
         .insight-box .icon { font-size: 24px; }
         .insight-box strong { color: #059669; display: block; margin-bottom: 4px; }
         .insight-box p { color: #047857; font-size: 14px; margin: 0; }
 
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .feature-card {
-            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: var(--radius); padding: 32px; transition: all 0.3s;
-        }
+        .feature-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 32px; transition: all 0.3s; }
         .feature-card:hover { border-color: var(--secondary); transform: translateY(-5px); }
-        .feature-icon-box {
-            width: 56px; height: 56px; background: var(--gradient); border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; color: white; margin-bottom: 20px;
-        }
+        .feature-icon-box { width: 56px; height: 56px; background: var(--gradient); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; margin-bottom: 20px; }
         .feature-card h3 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 8px; }
         .feature-card p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6; }
+
+        .audience-card { background: white; border: 1px solid #E2E8F0; border-radius: var(--radius); padding: 32px; transition: all 0.3s; }
+        .audience-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow); }
+        .audience-card h3 { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+        .audience-card p { color: var(--gray); font-size: 14px; line-height: 1.6; }
+        .badge-plan { display: inline-block; padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600; margin-top: 12px; }
+        .badge-blue { background: #EFF6FF; color: #2563EB; } .badge-green { background: #ECFDF5; color: #059669; }
+        .badge-orange { background: #FFF7ED; color: #EA580C; } .badge-purple { background: #F5F3FF; color: #7C3AED; }
 
         .comparison-wrapper { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); }
         .comparison-wrapper table { width: 100%; border-collapse: collapse; }
@@ -255,24 +137,21 @@
         .comparison-wrapper .adtracker-col { background: rgba(74,144,226,0.05); color: var(--primary); font-size: 15px; }
         .comparison-wrapper td { padding: 18px 20px; text-align: center; border-bottom: 1px solid #E2E8F0; font-size: 14px; }
         .comparison-wrapper td:first-child { text-align: left; font-weight: 600; }
-        .check { color: #10B981; font-size: 20px; }
-        .cross { color: #EF4444; font-size: 20px; }
+        .check { color: #10B981; font-size: 20px; } .cross { color: #EF4444; font-size: 20px; }
 
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; align-items: start; }
-        .pricing-card { background: white; border-radius: 20px; padding: 40px 32px; box-shadow: var(--shadow); transition: all 0.3s; position: relative; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; align-items: stretch; }
+        .pricing-card { background: white; border-radius: 20px; padding: 40px 32px; box-shadow: var(--shadow); transition: all 0.3s; position: relative; display: flex; flex-direction: column; }
         .pricing-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
-        .pricing-card.featured { border: 2px solid var(--primary); transform: scale(1.03); }
-        .pricing-card.featured:hover { transform: scale(1.03) translateY(-10px); }
+        .pricing-card.featured { border: 2px solid var(--primary); }
         .pricing-badge { position: absolute; top: -14px; right: 24px; background: var(--gradient); color: white; padding: 8px 20px; border-radius: 50px; font-size: 12px; font-weight: 700; }
         .pricing-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
         .pricing-price { font-size: 48px; font-weight: 900; margin-bottom: 4px; color: var(--dark); }
         .pricing-price span { font-size: 15px; font-weight: 400; color: var(--gray); }
         .pricing-desc { color: var(--gray); margin-bottom: 28px; font-size: 14px; }
-        .pricing-features { list-style: none; margin-bottom: 28px; }
+        .pricing-features { list-style: none; margin-bottom: 28px; flex: 1; }
         .pricing-features li { padding: 10px 0; font-size: 14px; display: flex; align-items: center; gap: 10px; color: var(--gray); }
-        .pricing-features li i.fa-check { color: #10B981; }
-        .pricing-features li i.fa-star { color: #F39C12; }
-        .btn-pricing { display: block; text-align: center; padding: 15px; border-radius: 50px; font-weight: 700; font-size: 15px; text-decoration: none; transition: all 0.3s; }
+        .pricing-features li i.fa-check { color: #10B981; } .pricing-features li i.fa-star { color: #F39C12; }
+        .btn-pricing { display: block; text-align: center; padding: 15px; border-radius: 50px; font-weight: 700; font-size: 15px; text-decoration: none; transition: all 0.3s; margin-top: auto; }
         .btn-pricing-outline { border: 2px solid var(--primary); color: var(--primary); }
         .btn-pricing-outline:hover { background: var(--primary); color: white; }
         .btn-pricing-filled { background: var(--gradient); color: white; }
@@ -292,48 +171,24 @@
         .footer-links a:hover { color: var(--secondary); }
         .footer-links .separator { color: rgba(255,255,255,0.2); }
 
-        @media (max-width: 1024px) {
-            .hero .container { grid-template-columns: 1fr; text-align: center; }
-            .hero h1 { font-size: 40px; }
-            .hero p { margin-left: auto; margin-right: auto; }
-            .hero-stats { justify-content: center; }
-            .hero-buttons { justify-content: center; }
-            .hero-visual { display: none; }
-            .section-title { font-size: 32px; }
-        }
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .mobile-toggle { display: block; }
-            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,23,42,0.98); backdrop-filter: blur(20px); padding: 24px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.1); }
-            .hero h1 { font-size: 32px; }
-            .hero-stats { flex-direction: column; gap: 16px; align-items: center; }
-            .hero-stat { text-align: center; }
-            .section { padding: 60px 0; }
-            .section-title { font-size: 28px; }
-            .pricing-card.featured { transform: none; }
-            .table-wrapper { overflow-x: auto; }
-            .table-wrapper table { min-width: 600px; }
-            .comparison-wrapper { overflow-x: auto; }
-            .comparison-wrapper table { min-width: 500px; }
-        }
+        @media (max-width: 1024px) { .hero .container { grid-template-columns: 1fr; text-align: center; } .hero h1 { font-size: 40px; } .hero p { margin-left: auto; margin-right: auto; } .hero-stats { justify-content: center; } .hero-buttons { justify-content: center; } .section-title { font-size: 32px; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .mobile-toggle { display: block; } .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,23,42,0.98); backdrop-filter: blur(20px); padding: 24px; gap: 16px; border-top: 1px solid rgba(255,255,255,0.1); } .hero h1 { font-size: 32px; } .hero-stats { flex-direction: column; gap: 16px; align-items: center; } .section { padding: 60px 0; } .section-title { font-size: 28px; } .table-wrapper { overflow-x: auto; } .table-wrapper table { min-width: 600px; } .comparison-wrapper { overflow-x: auto; } .comparison-wrapper table { min-width: 500px; } }
     </style>
 </head>
 <body>
 
     <div class="preloader" id="preloader"><div class="preloader-spinner"></div></div>
 
+    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="container">
-            <a href="#" class="nav-brand">
-                <div class="nav-logo">AT</div>
-                <div class="nav-name">AdTracker <span>MCP</span></div>
-            </a>
+            <a href="#" class="nav-brand"><div class="nav-logo">AT</div><div class="nav-name">AdTracker <span>MCP</span></div></a>
             <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#problema">O Problema</a></li>
                 <li><a href="#solucao">Solução</a></li>
                 <li><a href="#funcionalidades">Funcionalidades</a></li>
-                <li><a href="#comparativo">Comparativo</a></li>
+                <li><a href="#para-quem">Para Quem</a></li>
                 <li><a href="#planos">Planos</a></li>
                 <li><a href="documentacao.html">📄 Documentação</a></li>
                 <li><a href="https://adtrackermcp-frontend-react.onrender.com/login" class="btn-nav">Começar Agora</a></li>
@@ -341,6 +196,7 @@
         </div>
     </nav>
 
+    <!-- HERO -->
     <section class="hero" id="home">
         <div class="container">
             <div>
@@ -360,13 +216,10 @@
         </div>
     </section>
 
+    <!-- PROBLEMA -->
     <section class="section section-gray" id="problema">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">O Problema</span>
-                <h2 class="section-title">Sua agência está perdendo dinheiro com processos manuais</h2>
-                <p class="section-subtitle">Gestores gastam em média 12 horas por semana apenas consolidando dados. Isso representa 60 dias de trabalho por ano desperdiçados.</p>
-            </div>
+            <div class="section-header"><span class="section-label">O Problema</span><h2 class="section-title">Sua agência está perdendo dinheiro com processos manuais</h2><p class="section-subtitle">Gestores gastam em média 12 horas por semana apenas consolidando dados. Isso representa 60 dias de trabalho por ano desperdiçados.</p></div>
             <div class="problems-grid">
                 <div class="problem-card" data-aos="fade-up"><div class="problem-icon">🔴</div><h3>Múltiplos Dashboards</h3><p>Alternar entre Google, Meta, TikTok e LinkedIn consome tempo e gera confusão com métricas inconsistentes entre plataformas.</p></div>
                 <div class="problem-card" data-aos="fade-up" data-aos-delay="100"><div class="problem-icon">📊</div><h3>Métricas Incompatíveis</h3><p>Cada plataforma usa nomes e formatos diferentes. Comparar resultados vira um quebra-cabeça manual no Excel.</p></div>
@@ -378,13 +231,10 @@
         </div>
     </section>
 
+    <!-- SOLUÇÃO -->
     <section class="section section-dark" id="solucao">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">Nossa Solução</span>
-                <h2 class="section-title">Uma plataforma. Quatro plataformas. Inteligência Artificial.</h2>
-                <p class="section-subtitle">Consolide, analise e otimize com tecnologia de ponta.</p>
-            </div>
+            <div class="section-header"><span class="section-label">Nossa Solução</span><h2 class="section-title">Uma plataforma. Quatro plataformas. Inteligência Artificial.</h2><p class="section-subtitle">Consolide, analise e otimize com tecnologia de ponta.</p></div>
             <div class="platforms-row" data-aos="fade-up">
                 <div class="platform-item google"><i class="fa-brands fa-google"></i><span>Google Ads</span></div>
                 <div class="platform-item meta"><i class="fa-brands fa-facebook"></i><span>Meta Ads</span></div>
@@ -396,13 +246,10 @@
         </div>
     </section>
 
+    <!-- PROVA SOCIAL -->
     <section class="section section-gray">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">Prova Social</span>
-                <h2 class="section-title">Veja o poder da consolidação em números reais</h2>
-                <p class="section-subtitle">Dados consolidados de um cliente real com campanhas ativas em 3 plataformas.</p>
-            </div>
+            <div class="section-header"><span class="section-label">Prova Social</span><h2 class="section-title">Veja o poder da consolidação em números reais</h2><p class="section-subtitle">Dados consolidados de um cliente real com campanhas ativas em 3 plataformas.</p></div>
             <div class="table-wrapper" data-aos="fade-up">
                 <table>
                     <thead><tr><th>Métrica</th><th>Google Ads</th><th>Meta Ads</th><th>TikTok Ads</th><th>TOTAL</th></tr></thead>
@@ -419,20 +266,14 @@
                     </tbody>
                 </table>
             </div>
-            <div class="insight-box" data-aos="fade-up">
-                <span class="icon">💡</span>
-                <div><strong>Insight gerado por IA:</strong><p>"O TikTok Ads apresenta o menor CPC (R$ 0,13) e o maior ROAS (427x). Recomendo aumentar o investimento nesta plataforma em 50% para maximizar o retorno."</p></div>
-            </div>
+            <div class="insight-box" data-aos="fade-up"><span class="icon">💡</span><div><strong>Insight gerado por IA:</strong><p>"O TikTok Ads apresenta o menor CPC (R$ 0,13) e o maior ROAS (427x). Recomendo aumentar o investimento nesta plataforma em 50% para maximizar o retorno."</p></div></div>
         </div>
     </section>
 
+    <!-- FUNCIONALIDADES -->
     <section class="section section-dark" id="funcionalidades">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">Funcionalidades</span>
-                <h2 class="section-title">Tudo que você precisa. Nada que você não precise.</h2>
-                <p class="section-subtitle">Funcionalidades projetadas para resolver problemas reais de agências e gestores de tráfego.</p>
-            </div>
+            <div class="section-header"><span class="section-label">Funcionalidades</span><h2 class="section-title">Tudo que você precisa. Nada que você não precise.</h2><p class="section-subtitle">Funcionalidades projetadas para resolver problemas reais de agências e gestores de tráfego.</p></div>
             <div class="features-grid">
                 <div class="feature-card" data-aos="fade-up"><div class="feature-icon-box">📊</div><h3>Dashboard Unificado</h3><p>Todas as métricas em um único painel. Compare plataformas, clientes e campanhas em tempo real.</p></div>
                 <div class="feature-card" data-aos="fade-up" data-aos-delay="100"><div class="feature-icon-box">🤖</div><h3>IA Integrada (Chat)</h3><p>Converse com seus dados como se estivesse falando com um analista. Peça análises e recomendações.</p></div>
@@ -444,12 +285,34 @@
         </div>
     </section>
 
-    <section class="section section-gray" id="comparativo">
+    <!-- PARA QUEM É -->
+    <section class="section section-gray" id="para-quem">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Comparativo</span>
-                <h2 class="section-title">Por que o AdTracker MCP é a melhor escolha?</h2>
+                <span class="section-label">Público-Alvo</span>
+                <h2 class="section-title">Para quem é o AdTracker MCP?</h2>
+                <p class="section-subtitle">Se você gerencia anúncios em múltiplas plataformas, esta solução foi feita para você.</p>
             </div>
+            <div class="features-grid">
+                <div class="audience-card" data-aos="fade-up"><div class="feature-icon-box">🏢</div><h3>Agências de Marketing</h3><p>Gerencie dezenas de clientes em um único dashboard. Relatórios profissionais em segundos. Economize 12h/semana.</p><span class="badge-plan badge-blue">Plano Profissional</span></div>
+                <div class="audience-card" data-aos="fade-up" data-aos-delay="100"><div class="feature-icon-box">📊</div><h3>Gestores de Tráfego</h3><p>Mostre resultados profissionais para seus clientes. IA que sugere otimizações. Dashboard white-label.</p><span class="badge-plan badge-green">Plano Essencial</span></div>
+                <div class="audience-card" data-aos="fade-up" data-aos-delay="200"><div class="feature-icon-box">🛒</div><h3>E-commerces</h3><p>Visão unificada de Google, Meta e TikTok. Descubra qual canal traz mais retorno. Decisões baseadas em dados.</p><span class="badge-plan badge-green">Plano Essencial</span></div>
+                <div class="audience-card" data-aos="fade-up" data-aos-delay="300"><div class="feature-icon-box">📈</div><h3>Marketing de Performance</h3><p>Escale campanhas com eficiência. Visão 360° de todas as plataformas. API REST para integrações.</p><span class="badge-plan badge-blue">Plano Profissional</span></div>
+                <div class="audience-card" data-aos="fade-up" data-aos-delay="400"><div class="feature-icon-box">🎓</div><h3>Profissionais Autônomos</h3><p>Comece com 14 dias grátis. Ideal para quem está entrando no mercado de gestão de tráfego.</p><span class="badge-plan badge-orange">Teste Grátis</span></div>
+                <div class="audience-card" data-aos="fade-up" data-aos-delay="500"><div class="feature-icon-box">🏛️</div><h3>Grandes Operações</h3><p>Self-hosted no seu servidor. Código aberto customizável. SLA 99.9%. Suporte 24/7 dedicado.</p><span class="badge-plan badge-purple">Enterprise</span></div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 60px; margin-top: 60px; flex-wrap: wrap; text-align: center;">
+                <div><div style="font-size: 36px; font-weight: 900; color: var(--primary);">40.000+</div><div style="color: var(--gray); font-size: 14px;">Agências no Brasil</div></div>
+                <div><div style="font-size: 36px; font-weight: 900; color: var(--primary);">R$ 30 Bi</div><div style="color: var(--gray); font-size: 14px;">Mercado de anúncios digitais</div></div>
+                <div><div style="font-size: 36px; font-weight: 900; color: var(--primary);">95%</div><div style="color: var(--gray); font-size: 14px;">Menos tempo em relatórios</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARATIVO -->
+    <section class="section section-gray" id="comparativo">
+        <div class="container">
+            <div class="section-header"><span class="section-label">Comparativo</span><h2 class="section-title">Por que o AdTracker MCP é a melhor escolha?</h2></div>
             <div class="comparison-wrapper" data-aos="fade-up">
                 <table>
                     <thead><tr><th>Funcionalidade</th><th class="adtracker-col">⭐ AdTracker MCP</th><th>Supermetrics</th><th>Funnel.io</th><th>Reportei</th></tr></thead>
@@ -468,53 +331,30 @@
         </div>
     </section>
 
+    <!-- PLANOS -->
     <section class="section section-gray" id="planos">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">Planos</span>
-                <h2 class="section-title">Invista no crescimento da sua agência</h2>
-                <p class="section-subtitle">Planos flexíveis para todos os tamanhos de operação. Cancele quando quiser.</p>
-            </div>
+            <div class="section-header"><span class="section-label">Planos</span><h2 class="section-title">Invista no crescimento da sua agência</h2><p class="section-subtitle">Planos flexíveis para todos os tamanhos de operação. Cancele quando quiser.</p></div>
             <div class="pricing-grid">
                 <div class="pricing-card" data-aos="fade-up">
-                    <div class="pricing-name">💎 Essencial</div>
-                    <div class="pricing-price">R$ 97<span>/mês</span></div>
-                    <p class="pricing-desc">Ideal para profissionais autônomos</p>
+                    <div><div class="pricing-name">💎 Essencial</div><div class="pricing-price">R$ 97<span>/mês</span></div><p class="pricing-desc">Ideal para profissionais autônomos</p></div>
                     <ul class="pricing-features">
-                        <li><i class="fa-solid fa-check"></i> 3 plataformas</li>
-                        <li><i class="fa-solid fa-check"></i> Até 10 clientes</li>
-                        <li><i class="fa-solid fa-check"></i> Dashboard unificado</li>
-                        <li><i class="fa-solid fa-check"></i> Relatórios CSV/Excel</li>
-                        <li><i class="fa-solid fa-check"></i> Suporte por email</li>
+                        <li><i class="fa-solid fa-check"></i> 3 plataformas</li><li><i class="fa-solid fa-check"></i> Até 10 clientes</li><li><i class="fa-solid fa-check"></i> Dashboard unificado</li><li><i class="fa-solid fa-check"></i> Relatórios CSV/Excel</li><li><i class="fa-solid fa-check"></i> Suporte por email</li><li><i class="fa-solid fa-check"></i> Atualizações gratuitas</li>
                     </ul>
                     <a href="https://adtrackermcp-frontend-react.onrender.com/register?plan=essencial" class="btn-pricing btn-pricing-outline">Começar Agora</a>
                 </div>
                 <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="200">
                     <div class="pricing-badge">⭐ MAIS POPULAR</div>
-                    <div class="pricing-name">🚀 Profissional</div>
-                    <div class="pricing-price">R$ 197<span>/mês</span></div>
-                    <p class="pricing-desc">Para agências em crescimento</p>
+                    <div><div class="pricing-name">🚀 Profissional</div><div class="pricing-price">R$ 197<span>/mês</span></div><p class="pricing-desc">Para agências em crescimento</p></div>
                     <ul class="pricing-features">
-                        <li><i class="fa-solid fa-check"></i> 4 plataformas</li>
-                        <li><i class="fa-solid fa-check"></i> Clientes ilimitados</li>
-                        <li><i class="fa-solid fa-star"></i> <strong>IA integrada</strong></li>
-                        <li><i class="fa-solid fa-check"></i> Relatórios PDF/Excel/CSV</li>
-                        <li><i class="fa-solid fa-check"></i> Sincronização automática</li>
-                        <li><i class="fa-solid fa-check"></i> Suporte prioritário</li>
+                        <li><i class="fa-solid fa-check"></i> 4 plataformas</li><li><i class="fa-solid fa-check"></i> Clientes ilimitados</li><li><i class="fa-solid fa-star"></i> <strong>IA integrada</strong></li><li><i class="fa-solid fa-check"></i> Relatórios PDF/Excel/CSV</li><li><i class="fa-solid fa-check"></i> Sincronização automática</li><li><i class="fa-solid fa-check"></i> Cache Redis (ultra-rápido)</li><li><i class="fa-solid fa-check"></i> Suporte prioritário</li>
                     </ul>
                     <a href="https://adtrackermcp-frontend-react.onrender.com/register?plan=profissional" class="btn-pricing btn-pricing-filled">Testar Grátis 14 Dias</a>
                 </div>
                 <div class="pricing-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="pricing-name">🏢 Enterprise</div>
-                    <div class="pricing-price">Sob consulta</div>
-                    <p class="pricing-desc">Para grandes operações</p>
+                    <div><div class="pricing-name">🏢 Enterprise</div><div class="pricing-price">Sob consulta</div><p class="pricing-desc">Para grandes operações</p></div>
                     <ul class="pricing-features">
-                        <li><i class="fa-solid fa-check"></i> Tudo do Profissional</li>
-                        <li><i class="fa-solid fa-star"></i> <strong>Self-hosted</strong></li>
-                        <li><i class="fa-solid fa-star"></i> <strong>Código aberto</strong></li>
-                        <li><i class="fa-solid fa-check"></i> SLA 99.9%</li>
-                        <li><i class="fa-solid fa-check"></i> Treinamento da equipe</li>
-                        <li><i class="fa-solid fa-check"></i> Suporte 24/7</li>
+                        <li><i class="fa-solid fa-check"></i> Tudo do Profissional</li><li><i class="fa-solid fa-star"></i> <strong>Self-hosted (seu servidor)</strong></li><li><i class="fa-solid fa-star"></i> <strong>Código aberto (customizável)</strong></li><li><i class="fa-solid fa-check"></i> Customizações exclusivas</li><li><i class="fa-solid fa-check"></i> SLA garantido (99.9%)</li><li><i class="fa-solid fa-check"></i> Treinamento da equipe</li><li><i class="fa-solid fa-check"></i> Suporte 24/7 dedicado</li>
                     </ul>
                     <a href="mailto:contato@adtracker.com" class="btn-pricing btn-pricing-outline">Falar com Vendas</a>
                 </div>
@@ -522,17 +362,20 @@
         </div>
     </section>
 
+    <!-- CTA -->
     <section class="cta-section" id="contato">
         <div class="container">
             <h2 data-aos="fade-up">🚀 Pronto para dominar suas campanhas?</h2>
             <p data-aos="fade-up" data-aos-delay="100">Comece hoje com 14 dias grátis. Sem compromisso, sem cartão de crédito.</p>
             <a href="https://adtrackermcp-frontend-react.onrender.com/register" class="btn-white" data-aos="fade-up" data-aos-delay="200"><i class="fa-solid fa-rocket"></i> Começar Teste Grátis</a>
             <div class="cta-contact" data-aos="fade-up" data-aos-delay="300">
-                📧 <a href="mailto:contato@adtracker.com">contato@adtracker.com</a> &nbsp;|&nbsp; 📱 <a href="#">WhatsApp</a>
+                📧 <a href="mailto:contato@adtracker.com">contato@adtracker.com</a> &nbsp;|&nbsp; 
+                📱 <a href="https://wa.me/55SEUNUMERO" target="_blank">WhatsApp</a>
             </div>
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
