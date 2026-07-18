@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO -->
+    <title>AdTracker MCP | Plataforma Inteligente de Gestão de Anúncios Multi-Plataforma</title>
+    <meta name="description" content="Consolide Google Ads, Meta Ads, TikTok Ads e LinkedIn Ads em um único dashboard. IA integrada, relatórios automáticos e economia de 95% do tempo.">
+    <meta name="keywords" content="gestão de anúncios, google ads, meta ads, tiktok ads, linkedin ads, dashboard, relatórios, ia, inteligência artificial">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AdTracker MCP - Plataforma Inteligente de Anúncios">
+    <meta property="og:description" content="Domine todas as suas campanhas em um só lugar com IA integrada.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --primary-dark: #357ABD;
+            --secondary: #50E3C2;
+            --accent: #F39C12;
+            --dark: #0F172A;
+            --dark-light: #1E293B;
+            --gray: #64748B;
+            --gray-light: #94A3B8;
+            --white: #FFFFFF;
+            --red: #EF4444;
+            --green: #10B981;
+            --gradient: linear-gradient(135deg, #4A90E2 0%, #50E3C2 100%);
+            --gradient-dark: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            --shadow: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1E293B;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================ */
+        /* PRELOADER */
+        /* ============================================ */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        .preloader.hidden { opacity: 0; visibility: hidden; }
+        .preloader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ============================================ */
+        /* NAVBAR */
+        /* ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .nav-logo {
+            width: 42px;
+            height: 42px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 18px;
+            color: white;
+        }
+        .nav-name { font-size: 20px; font-weight: 700; color: white; }
+        .nav-name span { color: var(--secondary); }
+        .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--secondary); }
+        .btn-nav {
+            background: var(--gradient) !important;
+            color: white !important;
+            padding: 12px 28px !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            transition: all 0.3s !important;
+        }
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
+        }
+        .btn-nav::after { display: none !important; }
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ============================================ */
+        /* HERO */
+        /* ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--gradient-dark);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(74, 144, 226, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(80, 227, 194, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(80, 227, 194, 0.15);
+            color: var(--secondary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease;
+        }
+        .hero-tag .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 520px;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 32px;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        .hero-stat h3 {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+        }
+        .hero-stat h3 span { color: var(--secondary); }
+        .hero-stat p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            margin: 0;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 8px 30px rgba(74, 144, 226, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.5);
+        }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-outline:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+        .btn-lg { padding: 18px 40px; font-size: 16px; }
+        .hero-visual {
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+        .dashboard-mockup {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+        .dashboard-mockup:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+        .mockup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .mockup-dots { display: flex; gap: 6px; }
+        .mockup-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+        }
+        .mockup-dot:nth-child(1) { background: #EF4444; }
+        .mockup-dot:nth-child(2) { background: #F39C12; }
+        .mockup-dot:nth-child(3) { background: #10B981; }
+        .mockup-title { font-size: 13px; font-weight: 600; color: #64748B; }
+        .mockup-badge {
+            background: #ECFDF5; color: #10B981;
+            padding: 4px 12px; border-radius: 50px;
+            font-size: 11px; font-weight: 600;
+        }
+        .mockup-kpis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .mockup-kpi {
+            background: #F8FAFC;
+            padding: 14px;
+            border-radius: 10px;
+        }
+        .mockup-kpi-label { font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .mockup-kpi-value { font-size: 20px; font-weight: 700; color: #1E293B; }
+        .mockup-kpi-value.up { color: #10B981; }
+        .mockup-kpi-value.down { color: #EF4444; }
+        .mockup-bars { space-y: 8px; }
+        .mockup-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .mockup-bar-label { font-size: 10px; color: #64748B; min-width: 60px; }
+        .mockup-bar {
+            flex: 1;
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .mockup-bar-fill { height: 100%; border-radius: 3px; }
+        .mockup-bar-fill.g { width: 52%; background: #4285F4; }
+        .mockup-bar-fill.m { width: 31%; background: #1877F2; }
+        .mockup-bar-fill.t { width: 17%; background: #000; }
+        .mockup-bar-value { font-size: 10px; color: #64748B; font-weight: 600; min-width: 35px; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================ */
+        /* SECTIONS */
+        /* ============================================ */
+        .section { padding: 100px 0; position: relative; }
+        .section-dark { background: var(--dark); color: white; }
+        .section-gray { background: #F8FAFC; }
+        .section-header { text-align: center; margin-bottom: 64px; }
+        .section-label {
+            display: inline-block;
+            background: rgba(74, 144, 226, 0.1);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .section-dark .section-title { color: white; }
+        .section-subtitle {
+            font-size: 17px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .section-dark .section-subtitle { color: rgba(255,255,255,0.6); }
+
+        /* ============================================ */
+        /* PROBLEM CARDS */
+        /* ============================================ */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+        .problem-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--red);
+            transition: all 0.3s ease;
+        }
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .problem-icon { font-size: 36px; margin-bottom: 16px; }
+        .problem-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+        .problem-card p { color: var(--gray); font-size: 14px; line-height: 1.6; }
+
+        /* ============================================ */
+        /* SOLUTION FLOW */
+        /* ============================================ */
+        .platforms-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .platform-item {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            text-align: center;
+            min-width: 140px;
+            transition: all 0.3s;
+        }
+        .platform-item:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-5px);
+        }
+        .platform-item i { font-size: 32px; margin-bottom: 8px; display: block; }
+        .platform-item.google i { color: #4285F4; }
+        .platform-item.meta i { color: #1877F2; }
+        .platform-item.tiktok i { color: #fff; }
+        .platform-item.linkedin i { color: #0A66C2; }
+        .platform-item span {
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.8);
+        }
+        .arrow-icon {
+            font-size: 28px;
+            color: var(--secondary);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+        .result-box {
+            background: var(--gradient);
+            border-radius: var(--radius);
+            padding: 24px 40px;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.3);
+        }
+
+        /* ============================================ */
+        /* METRICS SHOWCASE */
+        /* ============================================ */
+        .table-wrapper {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .table-wrapper table { width: 100%; border-collapse: collapse; }
+        .table-wrapper thead { background: var(--dark); }
+        .table-wrapper th {
+            color: white;
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .table-wrapper th:last-child {
+            background: var(--primary);
+        }
+        .table-wrapper td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 14px;
+        }
+        .table-wrapper tr:hover td { background: #F8FAFC; }
+        .table-wrapper .metric-name { font-weight: 600; }
+        .table-wrapper .total-col { font-weight: 700; color: var(--primary); background: rgba(74,144,226,0.03); }
+        .badge-roas {
+            background: #ECFDF5;
+            color: #10B981;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        .insight-box {
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .insight-box .icon { font-size: 24px; }
+        .insight-box strong { color: #059669; display: block; margin-bottom: 4px; }
+        .insight-box p { color: #047857; font-size: 14px; margin: 0; }
+
+        /* ============================================ */
+        /* FEATURES GRID */
+        /* ============================================ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        .feature-icon-box {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 8px; }
+        .feature-card p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6; }
+
+        /* ============================================ */
+        /* COMPARISON */
+        /* ============================================ */
+        .comparison-wrapper {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .comparison-wrapper table { width: 100%; border-collapse: collapse; }
+        .comparison-wrapper th {
+            padding: 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+            border-bottom: 2px solid #E2E8F0;
+        }
+        .comparison-wrapper th:first-child { text-align: left; }
+        .comparison-wrapper .adtracker-col {
+            background: rgba(74,144,226,0.05);
+            color: var(--primary);
+            font-size: 15px;
+        }
+        .comparison-wrapper td {
+            padding: 18px 20px;
+            text-align: center;
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 14px;
+        }
+        .comparison-wrapper td:first-child { text-align: left; font-weight: 600; }
+        .check { color: #10B981; font-size: 20px; }
+        .cross { color: #EF4444; font-size: 20px; }
+
+        /* ============================================ */
+        /* PRICING */
+        /* ============================================ */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            align-items: start;
+        }
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 32px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .pricing-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.03);
+        }
+        .pricing-card.featured:hover { transform: scale(1.03) translateY(-10px); }
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            right: 24px;
+            background: var(--gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .pricing-name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 4px;
+            color: var(--dark);
+        }
+        .pricing-price span { font-size: 15px; font-weight: 400; color: var(--gray); }
+        .pricing-desc { color: var(--gray); margin-bottom: 28px; font-size: 14px; }
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .pricing-features li {
+            padding: 10px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray);
+        }
+        .pricing-features li i.fa-check { color: #10B981; }
+        .pricing-features li i.fa-star { color: #F39C12; }
+        .btn-pricing {
+            display: block;
+            text-align: center;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-pricing-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-pricing-outline:hover { background: var(--primary); color: white; }
+        .btn-pricing-filled {
+            background: var(--gradient);
+            color: white;
+        }
+        .btn-pricing-filled:hover {
+            box-shadow: 0 10px 30px rgba(74,144,226,0.4);
+        }
+
+        /* ============================================ */
+        /* CTA */
+        /* ============================================ */
+        .cta-section {
+            background: var(--gradient);
+            padding: 80px 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 42px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 16px;
+        }
+        .cta-section p {
+            font-size: 17px;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 32px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 17px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-white:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .cta-contact {
+            margin-top: 24px;
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+        .cta-contact a { color: white; text-decoration: none; font-weight: 600; }
+
+        /* ============================================ */
+        /* FOOTER */
+        /* ============================================ */
+        .footer {
+            background: #0A0F1A;
+            color: rgba(255,255,255,0.5);
+            padding: 48px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; font-size: 13px; }
+        .footer-links a:hover { color: var(--secondary); }
+        .footer-links .separator { color: rgba(255,255,255,0.2); }
+
+        /* ============================================ */
+        /* RESPONSIVE */
+        /* ============================================ */
+        @media (max-width: 1024px) {
+            .hero .container { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 40px; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-stats { justify-content: center; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { display: none; }
+            .section-title { font-size: 32px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(15,23,42,0.98);
+                backdrop-filter: blur(20px);
+                padding: 24px;
+                gap: 16px;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            .hero h1 { font-size: 32px; }
+            .hero-stats { flex-direction: column; gap: 16px; align-items: center; }
+            .hero-stat { text-align: center; }
+            .section { padding: 60px 0; }
+            .section-title { font-size: 28px; }
+            .pricing-card.featured { transform: none; }
+            .pricing-card.featured:hover { transform: translateY(-10px); }
+            .table-wrapper { overflow-x: auto; }
+            .table-wrapper table { min-width: 600px; }
+            .comparison-wrapper { overflow-x: auto; }
+            .comparison-wrapper table { min-width: 500px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- NAVBAR -->
+    <!-- ============================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-brand">
+                <div class="nav-logo">AT</div>
+                <div class="nav-name">AdTracker <span>MCP</span></div>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#problema">O Problema</a></li>
+                <li><a href="#solucao">Solução</a></li>
+                <li><a href="#funcionalidades">Funcionalidades</a></li>
+                <li><a href="#comparativo">Comparativo</a></li>
+                <li><a href="#planos">Planos</a></li>
+                <li><a href="documentacao.html" target="_blank">📄 Documentação</a></li>
+                <li><a href="#contato" class="btn-nav">Começar Agora</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- HERO -->
+    <!-- ============================================ -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div>
+                <div class="hero-tag">
+                    <span class="dot"></span> Lançamento 2026 — Tecnologia MCP + IA
+                </div>
+                <h1>Domine todas as suas <span>campanhas de anúncios</span> em um só lugar</h1>
+                <p>
+                    Consolide Google Ads, Meta Ads, TikTok Ads e LinkedIn Ads em um único dashboard. 
+                    Analise com Inteligência Artificial integrada e tome decisões baseadas em dados reais, 
+                    não em intuição.
+                </p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <h3><span>95%</span></h3>
+                        <p>Menos tempo em relatórios</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3><span>4</span></h3>
+                        <p>Plataformas integradas</p>
+                    </div>
+                    <div class="hero-stat">
+                        <h3><span>288x</span></h3>
+                        <p>ROAS médio dos clientes</p>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="documentacao.html" target="_blank" class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-book"></i> Ver Documentação Completa
+                    </a>
+                    <a href="#planos" class="btn btn-outline btn-lg">
+                        <i class="fa-solid fa-play"></i> Ver Planos
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="dashboard-mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dots">
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                            <div class="mockup-dot"></div>
+                        </div>
+                        <span class="mockup-title">📊 Dashboard Consolidado</span>
+                        <span class="mockup-badge">● Online</span>
+                    </div>
+                    <div class="mockup-kpis">
+                        <div class="mockup-kpi">
+                            <div class="mockup-kpi-label">Investimento</div>
+                            <div class="mockup-kpi-value">R$ 2.900</div>
+                        </div>
+                        <div class="mockup-kpi">
+                            <div class="mockup-kpi-label">ROAS Médio</div>
+                            <div class="mockup-kpi-value up">288x</div>
+                        </div>
+                        <div class="mockup-kpi">
+                            <div class="mockup-kpi-label">Conversões</div>
+                            <div class="mockup-kpi-value">80</div>
+                        </div>
+                        <div class="mockup-kpi">
+                            <div class="mockup-kpi-label">Receita</div>
+                            <div class="mockup-kpi-value up">R$ 835.500</div>
+                        </div>
+                    </div>
+                    <div style="font-size:10px;color:#94A3B8;margin-bottom:12px;">DISTRIBUIÇÃO DE GASTOS POR PLATAFORMA</div>
+                    <div class="mockup-bars">
+                        <div class="mockup-bar-row">
+                            <span class="mockup-bar-label">Google</span>
+                            <div class="mockup-bar"><div class="mockup-bar-fill g"></div></div>
+                            <span class="mockup-bar-value">52%</span>
+                        </div>
+                        <div class="mockup-bar-row">
+                            <span class="mockup-bar-label">Meta</span>
+                            <div class="mockup-bar"><div class="mockup-bar-fill m"></div></div>
+                            <span class="mockup-bar-value">31%</span>
+                        </div>
+                        <div class="mockup-bar-row">
+                            <span class="mockup-bar-label">TikTok</span>
+                            <div class="mockup-bar"><div class="mockup-bar-fill t"></div></div>
+                            <span class="mockup-bar-value">17%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PROBLEMA -->
+    <!-- ============================================ -->
+    <section class="section section-gray" id="problema">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">O Problema</span>
+                <h2 class="section-title">Sua agência está perdendo dinheiro com processos manuais</h2>
+                <p class="section-subtitle">Gestores gastam em média 12 horas por semana apenas consolidando dados. Isso representa 60 dias de trabalho por ano desperdiçados.</p>
+            </div>
+            <div class="problems-grid">
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="problem-icon">🔴</div>
+                    <h3>Múltiplos Dashboards</h3>
+                    <p>Alternar entre Google, Meta, TikTok e LinkedIn consome tempo e gera confusão com métricas inconsistentes entre plataformas.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="problem-icon">📊</div>
+                    <h3>Métricas Incompatíveis</h3>
+                    <p>Cada plataforma usa nomes e formatos diferentes. Comparar resultados vira um quebra-cabeça manual no Excel.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="problem-icon">⏱️</div>
+                    <h3>Relatórios Manuais</h3>
+                    <p>Horas copiando e colando dados. Relatórios que ficam desatualizados no momento em que são finalizados.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="problem-icon">🤔</div>
+                    <h3>Decisões sem Dados</h3>
+                    <p>Sem IA para analisar padrões, as decisões são baseadas em feeling, não em dados concretos e acionáveis.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="problem-icon">💰</div>
+                    <h3>Orçamento Desperdiçado</h3>
+                    <p>Sem visão clara do ROAS por plataforma, dinheiro é investido nos canais errados, reduzindo o retorno.</p>
+                </div>
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="problem-icon">📈</div>
+                    <h3>Escalabilidade Limitada</h3>
+                    <p>Quanto mais clientes, mais tempo gasto. Torna-se impossível escalar a agência sem automação inteligente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SOLUÇÃO -->
+    <!-- ============================================ -->
+    <section class="section section-dark" id="solucao">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Nossa Solução</span>
+                <h2 class="section-title">Uma plataforma. Quatro plataformas. Inteligência Artificial.</h2>
+                <p class="section-subtitle">Consolide, analise e otimize com tecnologia de ponta.</p>
+            </div>
+            <div class="platforms-row" data-aos="fade-up">
+                <div class="platform-item google">
+                    <i class="fa-brands fa-google"></i>
+                    <span>Google Ads</span>
+                </div>
+                <div class="platform-item meta">
+                    <i class="fa-brands fa-facebook"></i>
+                    <span>Meta Ads</span>
+                </div>
+                <div class="platform-item tiktok">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>TikTok Ads</span>
+                </div>
+                <div class="platform-item linkedin">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <span>LinkedIn Ads</span>
+                </div>
+                <div class="arrow-icon">→</div>
+                <div class="result-box">
+                    🤖 AdTracker MCP<br>
+                    <small style="font-weight:400;opacity:0.8;">Dashboard Único + IA Integrada</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MÉTRICAS -->
+    <!-- ============================================ -->
+    <section class="section section-gray">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Prova Social</span>
+                <h2 class="section-title">Veja o poder da consolidação em números reais</h2>
+                <p class="section-subtitle">Dados consolidados de um cliente real com campanhas ativas em 3 plataformas.</p>
+            </div>
+            <div class="table-wrapper" data-aos="fade-up">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrica</th>
+                            <th>Google Ads</th>
+                            <th>Meta Ads</th>
+                            <th>TikTok Ads</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="metric-name">Investimento</td>
+                            <td>R$ 1.500</td>
+                            <td>R$ 1.200</td>
+                            <td>R$ 200</td>
+                            <td class="total-col">R$ 2.900</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">Impressões</td>
+                            <td>50.000</td>
+                            <td>80.000</td>
+                            <td>30.000</td>
+                            <td class="total-col">160.000</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">Cliques</td>
+                            <td>2.500</td>
+                            <td>3.200</td>
+                            <td>1.500</td>
+                            <td class="total-col">7.200</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">Conversões</td>
+                            <td>45</td>
+                            <td>30</td>
+                            <td>5</td>
+                            <td class="total-col">80</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">Receita</td>
+                            <td>R$ 450.000</td>
+                            <td>R$ 300.000</td>
+                            <td>R$ 85.500</td>
+                            <td class="total-col">R$ 835.500</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">CTR</td>
+                            <td>5,0%</td>
+                            <td>4,0%</td>
+                            <td>5,0%</td>
+                            <td class="total-col">4,5%</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">CPC</td>
+                            <td>R$ 0,60</td>
+                            <td>R$ 0,38</td>
+                            <td>R$ 0,13</td>
+                            <td class="total-col">R$ 0,40</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">CPA</td>
+                            <td>R$ 33,33</td>
+                            <td>R$ 40,00</td>
+                            <td>R$ 40,00</td>
+                            <td class="total-col">R$ 36,25</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-name">ROAS</td>
+                            <td><span class="badge-roas">300x</span></td>
+                            <td><span class="badge-roas">250x</span></td>
+                            <td><span class="badge-roas">427x</span></td>
+                            <td class="total-col"><span class="badge-roas">288x</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="insight-box" data-aos="fade-up">
+                <span class="icon">💡</span>
+                <div>
+                    <strong>Insight gerado por IA:</strong>
+                    <p>"O TikTok Ads apresenta o menor CPC (R$ 0,13) e o maior ROAS (427x). Recomendo aumentar o investimento nesta plataforma em 50% para maximizar o retorno. O Google Ads mantém performance consistente com bom volume de conversões."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FUNCIONALIDADES -->
+    <!-- ============================================ -->
+    <section class="section section-dark" id="funcionalidades">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Funcionalidades</span>
+                <h2 class="section-title">Tudo que você precisa. Nada que você não precise.</h2>
+                <p class="section-subtitle">Funcionalidades projetadas para resolver problemas reais de agências e gestores de tráfego.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="feature-icon-box">📊</div>
+                    <h3>Dashboard Unificado</h3>
+                    <p>Todas as métricas em um único painel. Compare plataformas, clientes e campanhas em tempo real, sem alternar entre abas.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon-box">🤖</div>
+                    <h3>IA Integrada (Chat)</h3>
+                    <p>Converse com seus dados como se estivesse falando com um analista. Peça análises, recomendações e descubra insights ocultos.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon-box">📈</div>
+                    <h3>Gráficos Interativos</h3>
+                    <p>Visualize tendências com Recharts. Compare períodos, identifique sazonalidades e encontre oportunidades de otimização.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon-box">📥</div>
+                    <h3>Relatórios Profissionais</h3>
+                    <p>Exporte em PDF, Excel ou CSV com um clique. Relatórios prontos para apresentar ao cliente em segundos.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon-box">🔄</div>
+                    <h3>Sincronização Automática</h3>
+                    <p>Google Ads, Meta Ads, TikTok Ads e LinkedIn Ads integrados. Dados atualizados automaticamente.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon-box">👥</div>
+                    <h3>Multi-Tenant</h3>
+                    <p>Gerencie múltiplas agências e clientes com isolamento total de dados. Cada cliente vê apenas o seu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- COMPARATIVO -->
+    <!-- ============================================ -->
+    <section class="section section-gray" id="comparativo">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Comparativo</span>
+                <h2 class="section-title">Por que o AdTracker MCP é a melhor escolha?</h2>
+                <p class="section-subtitle">Compare com as principais soluções do mercado.</p>
+            </div>
+            <div class="comparison-wrapper" data-aos="fade-up">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Funcionalidade</th>
+                            <th class="adtracker-col">⭐ AdTracker MCP</th>
+                            <th>Supermetrics</th>
+                            <th>Funnel.io</th>
+                            <th>Reportei</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Código Aberto</td>
+                            <td class="adtracker-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>IA Nativa (Chat + Análise)</td>
+                            <td class="adtracker-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>Self-Hosted (Seus Dados)</td>
+                            <td class="adtracker-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>4+ Plataformas</td>
+                            <td class="adtracker-col"><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Relatórios PDF/Excel</td>
+                            <td class="adtracker-col"><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Preço Acessível</td>
+                            <td class="adtracker-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="check">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Customizável</td>
+                            <td class="adtracker-col"><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>API REST Completa</td>
+                            <td class="adtracker-col"><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="check">✓</span></td>
+                            <td><span class="cross">✗</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PLANOS -->
+    <!-- ============================================ -->
+    <section class="section section-gray" id="planos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Planos</span>
+                <h2 class="section-title">Invista no crescimento da sua agência</h2>
+                <p class="section-subtitle">Planos flexíveis para todos os tamanhos de operação. Cancele quando quiser.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="pricing-name">💎 Essencial</div>
+                    <div class="pricing-price">R$ 97<span>/mês</span></div>
+                    <p class="pricing-desc">Ideal para profissionais autônomos</p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> 3 plataformas</li>
+                        <li><i class="fa-solid fa-check"></i> Até 10 clientes</li>
+                        <li><i class="fa-solid fa-check"></i> Dashboard unificado</li>
+                        <li><i class="fa-solid fa-check"></i> Relatórios CSV/Excel</li>
+                        <li><i class="fa-solid fa-check"></i> Suporte por email</li>
+                        <li><i class="fa-solid fa-check"></i> Atualizações gratuitas</li>
+                    </ul>
+                    <a href="#contato" class="btn-pricing btn-pricing-outline">Começar Agora</a>
+                </div>
+                <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-badge">⭐ MAIS POPULAR</div>
+                    <div class="pricing-name">🚀 Profissional</div>
+                    <div class="pricing-price">R$ 197<span>/mês</span></div>
+                    <p class="pricing-desc">Para agências em crescimento</p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> 4 plataformas</li>
+                        <li><i class="fa-solid fa-check"></i> Clientes ilimitados</li>
+                        <li><i class="fa-solid fa-star"></i> <strong>IA integrada (ChatGPT/Gemini)</strong></li>
+                        <li><i class="fa-solid fa-check"></i> Relatórios PDF/Excel/CSV</li>
+                        <li><i class="fa-solid fa-check"></i> Sincronização automática</li>
+                        <li><i class="fa-solid fa-check"></i> Cache Redis (ultra-rápido)</li>
+                        <li><i class="fa-solid fa-check"></i> Suporte prioritário</li>
+                    </ul>
+                    <a href="#contato" class="btn-pricing btn-pricing-filled">Testar Grátis 14 Dias</a>
+                </div>
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="pricing-name">🏢 Enterprise</div>
+                    <div class="pricing-price">Sob consulta</div>
+                    <p class="pricing-desc">Para grandes operações</p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Tudo do Profissional</li>
+                        <li><i class="fa-solid fa-star"></i> <strong>Self-hosted (seu servidor)</strong></li>
+                        <li><i class="fa-solid fa-star"></i> <strong>Código aberto (customizável)</strong></li>
+                        <li><i class="fa-solid fa-check"></i> Customizações exclusivas</li>
+                        <li><i class="fa-solid fa-check"></i> SLA garantido (99.9%)</li>
+                        <li><i class="fa-solid fa-check"></i> Treinamento da equipe</li>
+                        <li><i class="fa-solid fa-check"></i> Suporte 24/7 dedicado</li>
+                    </ul>
+                    <a href="#contato" class="btn-pricing btn-pricing-outline">Falar com Vendas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA -->
+    <!-- ============================================ -->
+    <section class="cta-section" id="contato">
+        <div class="container">
+            <h2 data-aos="fade-up">🚀 Pronto para dominar suas campanhas?</h2>
+            <p data-aos="fade-up" data-aos-delay="100">
+                Comece hoje com 14 dias grátis. Sem compromisso, sem cartão de crédito.
+            </p>
+            <a href="documentacao.html" target="_blank" class="btn-white" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-book"></i> Ver Documentação Técnica
+            </a>
+            <div class="cta-contact" data-aos="fade-up" data-aos-delay="300">
+                📧 <a href="mailto:contato@adtracker.com">contato@adtracker.com</a>
+                &nbsp;|&nbsp;
+                📱 <a href="#">(XX) XXXXX-XXXX</a>
+                &nbsp;|&nbsp;
+                💬 <a href="#">WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Início</a><span class="separator">|</span>
+                <a href="#funcionalidades">Funcionalidades</a><span class="separator">|</span>
+                <a href="#planos">Planos</a><span class="separator">|</span>
+                <a href="documentacao.html" target="_blank">Documentação</a><span class="separator">|</span>
+                <a href="#">Política de Privacidade</a><span class="separator">|</span>
+                <a href="#">Termos de Uso</a>
+            </div>
+            <p>© 2026 <strong>AdTracker MCP</strong>. Todos os direitos reservados.</p>
+            <p style="margin-top:4px;">Plataforma de Consolidação de Dados de Ads com Inteligência Artificial</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 500);
+        });
+
+        // AOS Animation
+        AOS.init({ duration: 800, once: true });
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileToggle').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    document.getElementById('navLinks').classList.remove('open');
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

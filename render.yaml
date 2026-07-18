@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: adtracker-site
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
